@@ -25,39 +25,6 @@
         "software-delivery",
         "tdd",
         "code-review"
-      ],
-      "skills": [
-        {
-          "name": "weave-run",
-          "description": "Launch full 5-phase pipeline from scratch"
-        },
-        {
-          "name": "weave-discuss",
-          "description": "Structured requirement gathering interview"
-        },
-        {
-          "name": "weave-plan",
-          "description": "Decompose brief into vertical-slice task list"
-        },
-        {
-          "name": "weave-review",
-          "description": "On-demand architecture audit (AR001-AR005)"
-        },
-        {
-          "name": "weave-skill",
-          "description": "Generate new role skill for the inventory"
-        }
-      ],
-      "agents": [
-        "weave-orchestrator",
-        "weave-discussion",
-        "weave-planner",
-        "weave-auditor",
-        "weave-tester",
-        "weave-reporter",
-        "weave-dynamic",
-        "weave-spec-reviewer",
-        "weave-code-quality-reviewer"
       ]
     }
   ]
