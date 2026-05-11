@@ -14,8 +14,7 @@
         "source": "git-subdir",
         "url": "https://github.com/harrynguyen14/cortex-weave-marketplace.git",
         "path": ".",
-        "ref": "main",
-        "sha": "a30482673aa830384db4ebea86f0dc46f5a30bcb"
+        "ref": "main"
       },
       "author": {
         "name": "Mivenz",
