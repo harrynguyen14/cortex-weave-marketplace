@@ -11,8 +11,11 @@
       "description": "5-phase AI pipeline: discussion → planning → parallel implementation → QA → report. Spawns specialized sub-agents with automatic role selection from 33 skill inventory. Includes 3-agent review pipeline (implementer → spec-reviewer → code-quality-reviewer) per task.",
       "version": "1.0.0",
       "source": {
-        "type": "github",
-        "repo": "harrynguyen14/cortex-weave-marketplace"
+        "source": "git-subdir",
+        "url": "https://github.com/harrynguyen14/cortex-weave-marketplace.git",
+        "path": ".",
+        "ref": "main",
+        "sha": "ce4bbc44f19bfd88b4140e1aa65c8cdb14ffb8c0"
       },
       "author": {
         "name": "Mivenz",
