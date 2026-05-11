@@ -4,13 +4,10 @@
   "version": "1.0.0",
   "author": {
     "name": "Mivenz",
-    "url": "https://github.com/Mivenz"
+    "url": "https://github.com/harrynguyen14"
   },
-  "homepage": "https://github.com/Mivenz/CortexWeave",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Mivenz/CortexWeave"
-  },
+  "homepage": "https://github.com/harrynguyen14/cortex-weave-marketplace",
+  "repository": "https://github.com/harrynguyen14/cortex-weave-marketplace",
   "license": "MIT",
   "keywords": [
     "multi-agent",
@@ -20,5 +17,7 @@
     "tdd",
     "subagents",
     "software-delivery"
-  ]
+  ],
+  "skills": ["./skills/"],
+  "agents": ["./agents/"]
 }
