@@ -1,0 +1,64 @@
+{
+  "name": "cortexweave-marketplace",
+  "description": "CortexWeave multi-agent pipeline plugin — 5-phase software delivery with automatic skill-based agent selection",
+  "owner": {
+    "name": "Mivenz",
+    "url": "https://github.com/harrynguyen14"
+  },
+  "plugins": [
+    {
+      "name": "cortexweave",
+      "description": "5-phase AI pipeline: discussion → planning → parallel implementation → QA → report. Spawns specialized sub-agents with automatic role selection from 33 skill inventory. Includes 3-agent review pipeline (implementer → spec-reviewer → code-quality-reviewer) per task.",
+      "version": "1.0.0",
+      "source": "./",
+      "author": {
+        "name": "Mivenz",
+        "url": "https://github.com/harrynguyen14"
+      },
+      "homepage": "https://github.com/harrynguyen14/cortex-weave-marketplace",
+      "keywords": [
+        "multi-agent",
+        "pipeline",
+        "orchestration",
+        "planning",
+        "subagents",
+        "software-delivery",
+        "tdd",
+        "code-review"
+      ],
+      "skills": [
+        {
+          "name": "weave-run",
+          "description": "Launch full 5-phase pipeline from scratch"
+        },
+        {
+          "name": "weave-discuss",
+          "description": "Structured requirement gathering interview"
+        },
+        {
+          "name": "weave-plan",
+          "description": "Decompose brief into vertical-slice task list"
+        },
+        {
+          "name": "weave-review",
+          "description": "On-demand architecture audit (AR001-AR005)"
+        },
+        {
+          "name": "weave-skill",
+          "description": "Generate new role skill for the inventory"
+        }
+      ],
+      "agents": [
+        "weave-orchestrator",
+        "weave-discussion",
+        "weave-planner",
+        "weave-auditor",
+        "weave-tester",
+        "weave-reporter",
+        "weave-dynamic",
+        "weave-spec-reviewer",
+        "weave-code-quality-reviewer"
+      ]
+    }
+  ]
+}
