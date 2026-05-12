@@ -5,42 +5,60 @@ description: Use when requirements are missing, vague, or less than a paragraph 
 
 # CortexWeave — Discussion Phase
 
-Extracts complete requirements through a structured interview. Writes `conversation.md`.
+Extracts complete requirements through an adaptive interview. Writes `conversation.md`.
 
-## Research First
+## Step 1 — Parse What Already Exists
 
-Before asking questions, search online for:
-- Common architectures for this problem domain
-- Recommended libraries/frameworks for stated tech stack
-- Known pitfalls from similar projects
+Before asking anything, extract from what the user has already said:
 
-Use findings to give grounded recommendations during the interview.
+- Project type (web app, CLI, API, library, mobile, etc.)
+- Tech stack preferences or constraints
+- Features or goals already mentioned
+- Users or audience
+- Any explicit non-goals or constraints
 
-## Capture Rubric
+Mark each rubric category as **known**, **partial**, or **missing** based on this parse.
 
-Must answer ALL before finishing:
+## Step 2 — Adaptive Interview
 
-| Category | Must answer |
-|----------|-------------|
-| Problem | What it solves, who has this problem |
-| Users | Primary users, technical level |
-| Features | 3-5 MVP features (must-have vs nice-to-have) |
-| Tech Stack | Preferences or constraints |
-| Scale | Users at launch, data volume |
-| Auth | Need accounts? What method? |
-| Data | What's stored? PII or payments? |
-| Integrations | External APIs or services |
-| Non-goals | Explicitly out of scope |
+Ask only about **missing** or **partial** categories. Skip what's already known.
 
-## Interview Rules
+**Grouping rules (determines how many questions per turn):**
+- Ask related questions together in one turn (e.g., Auth + Data often go together; Scale + Integrations often go together)
+- Ask unrelated questions separately
+- If user gives a vague answer, follow up immediately before moving on
+- If user gives a detailed answer that covers multiple categories, acknowledge and skip those
 
-- Ask 2-3 questions at a time — never all at once
-- Follow up on vague answers
-- Never assume — ask if unsure
+**Never ask about a category the user already answered.**
 
-## Confirmation Before Writing
+### Rubric Categories
 
-After interview, present summary to user:
+| Category | Must answer | Skip if |
+|----------|-------------|---------|
+| Problem | What it solves, who has this problem | User already stated clear problem |
+| Users | Primary users, technical level | User already described audience |
+| Features | MVP features (must-have vs nice-to-have) | User already listed features |
+| Tech Stack | Preferences or constraints | User already mentioned stack |
+| Auth | Need accounts? What method? | Project type doesn't require auth (e.g., CLI tool, library) |
+| Data | What's stored? PII or payments? | No persistence needed |
+| Scale | Users at launch, data volume | MVP/prototype context makes this irrelevant |
+| Integrations | External APIs or services | No external dependencies implied |
+| Non-goals | Explicitly out of scope | Scope is already narrow and clear |
+
+## Step 3 — Technical Advisory (On Demand)
+
+When the user asks a specific technical question during the interview (e.g., "which database should I use?", "is X a good choice for this?", "what's the difference between A and B?"):
+
+1. **Pause the interview**
+2. **Search the web** for up-to-date information relevant to their stack and use case
+3. **Respond with a grounded recommendation** — cite sources, include trade-offs, tailor to their context
+4. **Resume the interview** from where you left off
+
+Trigger phrases: "should I use", "which is better", "recommend", "what do you think about", "is X good for", "how does X compare"
+
+## Step 4 — Confirmation Before Writing
+
+After all missing categories are covered, present a summary:
 
 ```
 Here's what I captured — confirm before I write conversation.md:
@@ -50,6 +68,7 @@ Users: [summary]
 Features: [list]
 Tech Stack: [summary]
 Non-goals: [list]
+[other relevant categories]
 
 Accurate? (yes / correct [X] / abort)
 ```

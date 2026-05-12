@@ -9,7 +9,7 @@
     {
       "name": "cortexweave",
       "description": "5-phase AI pipeline: discussion → planning → parallel implementation → QA → report. Spawns specialized sub-agents with automatic role selection from 33 skill inventory. Includes 3-agent review pipeline (implementer → spec-reviewer → code-quality-reviewer) per task.",
-      "version": "1.0.0",
+      "version": "1.0.2",
       "source": "./plugins/cortexweave",
       "author": {
         "name": "Mivenz",

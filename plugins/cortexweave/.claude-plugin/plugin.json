@@ -1,7 +1,7 @@
 {
   "name": "cortexweave",
   "description": "5-phase multi-agent software delivery pipeline: discussion, planning, parallel implementation, QA, and documentation — with automatic skill-based agent selection",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": {
     "name": "Mivenz",
     "url": "https://github.com/harrynguyen14"
