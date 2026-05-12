@@ -5,59 +5,73 @@ description: Use when the user wants to build a complete software project from s
 
 # CortexWeave — Full Pipeline
 
-Runs all 5 phases using specialized agents: Discussion → Planning → Implementation → QA → Report.
-
-## When to Use
-
-```dot
-digraph when {
-    "User wants full project built?" [shape=diamond];
-    "Already have conversation.md?" [shape=diamond];
-    "Already have plan.md?" [shape=diamond];
-    "weave-run (full pipeline)" [shape=box style=filled fillcolor=lightgreen];
-    "weave-discuss first" [shape=box];
-    "weave-plan first" [shape=box];
-    "weave-orchestrator directly" [shape=box];
-
-    "User wants full project built?" -> "Already have conversation.md?" [label="yes"];
-    "User wants full project built?" -> "weave-discuss first" [label="no — needs requirements"];
-    "Already have conversation.md?" -> "Already have plan.md?" [label="yes"];
-    "Already have conversation.md?" -> "weave-plan first" [label="no"];
-    "Already have plan.md?" -> "weave-orchestrator directly" [label="yes"];
-    "Already have plan.md?" -> "weave-run (full pipeline)" [label="no"];
-}
-```
+Runs all phases: Discussion → Planning → Implementation → QA → Report.
 
 ## Step 1 — Gather Context
 
-Ask the user (all 3 required before proceeding):
+Ask the user (required before proceeding):
 1. What are you building? (problem + who uses it)
 2. Tech stack preference? (or "let the architect decide")
 3. Output workspace path? (default: `./output/`)
 
-## Step 2 — Confirm
+## Step 2 — Research Before Advising
 
-Show summary and wait for "yes" before launching:
+Search online for:
+- Best practices and common architectures for this type of project
+- Recommended libraries/frameworks for the stated tech stack
+- Known pitfalls for this problem domain
+
+Use findings to give informed recommendations, not generic suggestions.
+
+## Step 3 — Advise and Confirm
+
+Present to user:
+- Recommended architecture + rationale from research
+- Suggested tech stack with tradeoffs
+- Estimated scope
+
+Show summary and **wait for explicit "yes"** before proceeding:
 
 ```
 Project: [summary]
-Stack:   [preference or "auto"]
+Stack:   [recommendation]
 Output:  [path]
 
-Phases: Discussion ✅ → Planning → Implementation → QA → Report
-Start?
+Phases: Discussion → Planning → Implementation → QA → Report
+Confirm? (yes/no)
 ```
 
-## Step 3 — Run Phases in Order
+## Step 4 — Discussion Phase
 
-Delegate to agents sequentially. Show one-line status after each phase completes. If a phase fails 3 times, surface the error and ask the user: retry / skip / abort.
+Run discussion phase. After it completes, show summary of `conversation.md` and ask:
+> "Does this capture your requirements? (yes / edit / abort)"
 
-## Step 4 — Final Summary
+**Do NOT start planning until user confirms.**
 
-Report: location of `reports/README.md` and `reports/doc.md`, QA pass/fail count, any architecture violations.
+## Step 5 — Planning Phase
+
+Run planning phase. After `plan.md` is written, show phase breakdown and ask:
+> "Approve Phase 1 to start? (yes / adjust / abort)"
+
+**Do NOT execute until user approves.**
+
+## Step 6 — Execute Phases with Confirmation
+
+Run phases sequentially. After each phase:
+
+```
+Phase [N] complete: [deliverable]
+Continue to Phase [N+1]: [what's next]? (yes / adjust / abort)
+```
+
+**Do NOT start next phase without explicit confirm.**
+
+## Step 7 — Final Summary
+
+Report: `reports/README.md` location, QA pass/fail count, any architecture violations.
 
 ## Rules
 
-- Never skip QA even if asked
-- Warn user when token budget hits 80%
-- Never silently retry an agent failure more than 3 times
+- Never skip QA
+- Warn when token budget hits 80%
+- Never silently retry a phase failure more than 3 times — surface the error and ask user

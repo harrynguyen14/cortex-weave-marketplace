@@ -50,81 +50,28 @@ Every implementation task goes through a 3-agent pipeline. Do NOT mark a task co
 
 ### Context to inject per sub-agent
 
+Use the prompt templates in `agents/`:
+- `implementer-prompt.md` — for spawning the implementer
+- `spec-reviewer-prompt.md` — for spawning the spec reviewer
+- `code-quality-reviewer-prompt.md` — for spawning the quality reviewer
+
+**Core rule: always inject context directly into the prompt. Never tell a subagent to read `plan.md`, `conversation.md`, `architecture_design.md`, or `api_spec.md` — paste the content in.**
+
 #### Implementer (weave-dynamic)
 
-Pass the **full text** of the task — do not make the sub-agent read plan.md itself. Pass the **content** of `architecture_design.md` and `api_spec.md` directly.
-
-```
-[Role skill content from plugin/agents/roles/[role].md — prepend here]
-
----
-
-Workspace context:
-[architecture_design.md full content]
-
----
-
-[api_spec.md full content]
-
----
-
-Your task:
-[task.id]: [task.title]
-
-[task.description — full text, including acceptance criteria]
-
-Skill needed: [task.skill_hint]
-
-Write your output to: output/[relevant_dir]/
-Write your memory to: memory_[your_agent_name].md
-```
+Follow `implementer-prompt.md`. Key points:
+- Read the matched role file from `agents/roles/[role].md` and prepend it
+- Paste full content of `architecture_design.md` and `api_spec.md` directly
+- Paste full task description from `plan.md` (do not reference the file)
+- If Phase 1 (no architecture files yet), omit those sections
 
 #### Spec Reviewer (weave-spec-reviewer)
 
-After implementer reports DONE or DONE_WITH_CONCERNS, spawn spec-reviewer with:
-
-```
-## What Was Requested
-
-[task.description — full text, same as given to implementer]
-
-## Acceptance Criteria
-[extracted from task.description]
-
-## API Contract (relevant endpoints)
-[relevant section from api_spec.md]
-
-## What the Implementer Claims They Built
-
-[implementer's full report]
-
-## Files to Review
-
-[list of files written by implementer, from their report]
-```
+Follow `spec-reviewer-prompt.md`. Spawn only after implementer reports DONE or DONE_WITH_CONCERNS.
 
 #### Code Quality Reviewer (weave-code-quality-reviewer)
 
-Only after spec-reviewer reports PASS. Spawn with:
-
-```
-## Task Summary
-
-[task.id]: [task.title]
-[1-2 sentence summary of what was implemented]
-
-## Files Written
-
-[list of files from implementer's report]
-
-## Architecture Context
-
-[architecture_design.md full content]
-
-## Implementer's Report
-
-[implementer's full report]
-```
+Follow `code-quality-reviewer-prompt.md`. Spawn **only after spec reviewer reports ✅ PASS**.
 
 ### Skill selection per task
 

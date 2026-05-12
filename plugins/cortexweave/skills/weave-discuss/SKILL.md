@@ -5,11 +5,20 @@ description: Use when requirements are missing, vague, or less than a paragraph 
 
 # CortexWeave — Discussion Phase
 
-Extracts complete, unambiguous requirements through a structured interview. Writes `conversation.md` — the source of truth for all downstream agents.
+Extracts complete requirements through a structured interview. Writes `conversation.md`.
+
+## Research First
+
+Before asking questions, search online for:
+- Common architectures for this problem domain
+- Recommended libraries/frameworks for stated tech stack
+- Known pitfalls from similar projects
+
+Use findings to give grounded recommendations during the interview.
 
 ## Capture Rubric
 
-Must have answers to ALL before finishing:
+Must answer ALL before finishing:
 
 | Category | Must answer |
 |----------|-------------|
@@ -19,18 +28,33 @@ Must have answers to ALL before finishing:
 | Tech Stack | Preferences or constraints |
 | Scale | Users at launch, data volume |
 | Auth | Need accounts? What method? |
-| Data | What's stored? Any PII or payments? |
+| Data | What's stored? PII or payments? |
 | Integrations | External APIs or services |
-| Timeline | Deadline? MVP scope? |
 | Non-goals | Explicitly out of scope |
 
 ## Interview Rules
 
 - Ask 2-3 questions at a time — never all at once
-- Follow up on vague answers: "what do you mean by X?"
-- For each feature: "What's the simplest version that would be useful?"
-- "Make it like X app" → ask which specific feature of X
+- Follow up on vague answers
 - Never assume — ask if unsure
+
+## Confirmation Before Writing
+
+After interview, present summary to user:
+
+```
+Here's what I captured — confirm before I write conversation.md:
+
+Problem: [summary]
+Users: [summary]
+Features: [list]
+Tech Stack: [summary]
+Non-goals: [list]
+
+Accurate? (yes / correct [X] / abort)
+```
+
+**Do NOT write `conversation.md` until user explicitly confirms.**
 
 ## Output — conversation.md
 
@@ -59,4 +83,4 @@ Must have answers to ALL before finishing:
 
 ## Done Signal
 
-Tell the user: "`conversation.md` written. Run `/cortexweave:weave-plan` to decompose into tasks."
+Tell user: "`conversation.md` written. Run `/cortexweave:weave-plan` to decompose into tasks."
